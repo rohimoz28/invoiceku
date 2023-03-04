@@ -117,10 +117,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-
-                <?= $this->renderSection('content'); ?>
-
-                <!-- /.container-fluid -->
+                <?php $this->renderSection('content'); ?>
 
             </div>
             <!-- End of Main Content -->
@@ -129,7 +126,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Rohimoz28 2023</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -174,7 +171,22 @@
 
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
+    <!-- Datetimepicker -->
+    <script>
+        $(document).ready(function() {
+            $('#datetimepicker').formatDate("yy-mm-dd", new Date(2007, 1 - 1, 26));
+        });
 
+        $(document).ready(function() {
+            $('#btn-description').click(function(event) {
+                event.preventDefault();
+                const form = $('.invoice-description')
+                const element = "<div class='col-md-6'><div class='form-group'><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div></div><div class='col-md-2'><div class='form-group'><input type='email' class='form-control' id='exampleFormControlInput1'></div></div><div class='col-md-2'><div class='form-group'><input type='email' class='form-control' id='exampleFormControlInput1'></div></div><div class='col-md-2'><div class='form-group'><input type='email' class='form-control' id='exampleFormControlInput1'></div></div>"
+
+                form.append(element)
+            })
+        })
+    </script>
 </body>
 
 </html>
