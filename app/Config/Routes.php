@@ -32,6 +32,8 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 $routes->get('/invoice', 'Invoice::index');
+$routes->post('/invoice/print-invoice', 'Invoice::printInvoice');
+// $routes->get('/invoice/show-invoice', 'Invoice::showInvoice');
 
 /*
  * --------------------------------------------------------------------

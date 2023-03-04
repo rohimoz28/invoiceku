@@ -181,10 +181,21 @@
             $('#btn-description').click(function(event) {
                 event.preventDefault();
                 const form = $('.invoice-description')
-                const element = "<div class='col-md-6'><div class='form-group'><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div></div><div class='col-md-2'><div class='form-group'><input type='email' class='form-control' id='exampleFormControlInput1'></div></div><div class='col-md-2'><div class='form-group'><input type='email' class='form-control' id='exampleFormControlInput1'></div></div><div class='col-md-2'><div class='form-group'><input type='email' class='form-control' id='exampleFormControlInput1'></div></div>"
+                const element = "<input type='hidden' name='invdetail[]' class='invdetail'><div class='col-md-3'><div class='form-group'><textarea class='form-control' id='exampleFormControlTextarea1' name='description[]' rows='3'></textarea></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='flight[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='booking[]'></div></div><div class='col-md-1'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='qty[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='price[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='total[]'></div></div>"
 
                 form.append(element)
             })
+        })
+
+
+        $(document).ready(function() {
+            $(".noinv").change(function() {
+                const inv = $(this).val()
+                $(".invdetail").val(inv)
+
+                console.log(inv)
+            })
+
         })
     </script>
 </body>
