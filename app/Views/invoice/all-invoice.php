@@ -42,7 +42,9 @@
                         <tr class="text-center">
                             <td class="d-flex justify-content-between">
                                 <a href="<?= base_url() ?>detail-invoice/<?= $invoice['id'] ?>" class="btn btn-sm btn-success">Detail</a>
-                                <a href="<?= base_url() ?>invoice/delete/<?= $invoice['id'] ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                <button type="button" data-id="<?= $invoice['invoice'] ?>" class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#modal-delete">
+                                    Hapus
+                                </button>
                             </td>
                             <td><?= date('Y-m-d', strtotime($invoice['invoice_date'])) ?></td>
                             <td><?= $invoice['invoice'] ?></td>
@@ -55,6 +57,27 @@
                     <?php endforeach;  ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><strong>Hapus Invoice</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Anda Yakin Ingin Menghapus Invoice ?
+            </div>
+            <div class="modal-footer" id="adelete">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <a href="" class="btn btn-danger">Hapus</a>
+            </div>
         </div>
     </div>
 </div>

@@ -112,7 +112,15 @@ class Invoice extends BaseController
 
     public function deleteInvoice($invoice_id)
     {
-        return $invoice_id;
+        $session = \Config\Services::session();
+
+        $is_deleted = $this->invoiceModel->deleteInvoice($invoice_id);
+        if ($is_deleted == false) {
+            return redirect()->back()->with('error', 'Error while deleting invoice!');
+        } else {
+            $session->setFlashdata('success', 'Success delete new invoice!');
+            return redirect()->to('invoice/all-invoice');
+        }
     }
 
     public function htmlToPDF()

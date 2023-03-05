@@ -78,4 +78,20 @@ class Invoice extends Model
 
         return (is_null($query->getFirstRow())) ? 0 : $last_inv->invoice;
     }
+
+    public function deleteInvoice($invoice_id)
+    {
+        $this->db->transBegin();
+
+        $this->db->table('invoices')->delete(['invoice' => $invoice_id]);
+        $this->db->table('invoice_details')->delete(['invoice_id' => $invoice_id]);
+
+        if ($this->db->transStatus() === FALSE) {
+            $this->db->transRollback();
+        } else {
+            $this->db->transCommit();
+        }
+
+        return ($this->db->transStatus() === false) ? false : true;
+    }
 }

@@ -195,6 +195,17 @@
             const inv = $(".noinv").val()
             $(".invdetail").val(inv)
         })
+
+        $(document).ready(function() {
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+            $(".btn-delete").on("click", function() {
+                const id = $(this).data("id");
+                // console.log(baseUrl);
+                $("#adelete a[href]:first").attr("href", baseUrl + "invoice/delete/" + id);
+            });
+        });
     </script>
 </body>
 
