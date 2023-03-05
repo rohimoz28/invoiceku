@@ -12,11 +12,11 @@
     <title>InvoiceKu</title>
 
     <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -37,34 +37,34 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <!-- <hr class="sidebar-divider my-0"> -->
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menu
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Invoices</span>
+                    <span>Invoice</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu Invoice</h6>
-                        <a class="collapse-item" href="/invoice/invoice">Print Invoice</a>
-                        <a class="collapse-item" href="/invoice/all-invoice">Invoice List</a>
+                        <a class="collapse-item" href="<?= base_url() ?>invoice">Cetak Invoice</a>
+                        <a class="collapse-item" href="<?= base_url() ?>invoice/all-invoice">List Invoice</a>
                     </div>
                 </div>
             </li>
@@ -100,7 +100,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="assets/img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="<?= base_url() ?>assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -163,39 +163,37 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="assets/js/sb-admin-2.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/sb-admin-2.min.js"></script>
     <!-- Datetimepicker -->
     <script>
         $(document).ready(function() {
-            $('#datetimepicker').formatDate("yy-mm-dd", new Date(2007, 1 - 1, 26));
+            $('.datetimepicker').formatDate("yy-mm-dd", new Date(2007, 1 - 1, 26));
         });
 
         $(document).ready(function() {
             $('#btn-description').click(function(event) {
                 event.preventDefault();
                 const form = $('.invoice-description')
-                const element = "<input type='hidden' name='invdetail[]' class='invdetail'><div class='col-md-3'><div class='form-group'><textarea class='form-control' id='exampleFormControlTextarea1' name='description[]' rows='3'></textarea></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='flight[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='booking[]'></div></div><div class='col-md-1'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='qty[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='price[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='total[]'></div></div>"
+                const element = "<input type='hidden' name='invdetail[]' class='detailinv'><div class='col-md-3'><div class='form-group'><textarea class='form-control' id='exampleFormControlTextarea1' name='description[]' rows='3'></textarea></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='flight[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='exampleFormControlInput1' name='booking[]'></div></div><div class='col-md-2'><div class='form-group'><input type='date' class='form-control' id='exampleFormControlInput1' name='detail_date[]'></div></div><div class='col-md-1'><div class='form-group'><input type='text' class='form-control' id='qty' name='qty[]'></div></div><div class='col-md-2'><div class='form-group'><input type='text' class='form-control' id='price' name='price[]'></div></div></div>"
 
                 form.append(element)
+
+                const inv = $(".invdetail").val()
+                $(".detailinv").val(inv)
+
             })
         })
 
-
         $(document).ready(function() {
-            $(".noinv").change(function() {
-                const inv = $(this).val()
-                $(".invdetail").val(inv)
-
-                console.log(inv)
-            })
-
+            const inv = $(".noinv").val()
+            $(".invdetail").val(inv)
         })
     </script>
 </body>

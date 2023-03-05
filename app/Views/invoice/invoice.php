@@ -8,7 +8,23 @@
      <!-- Page Heading -->
      <h1 class="h3 mb-4 text-gray-800">Invoices</h1>
 
-     <form action="/invoice/print-invoice" method="post">
+     <!-- VALIDATATION MESSAGES -->
+     <div class="row">
+         <div class="col-md-12">
+             <?php if (session()->getFlashdata('success')) : ?>
+                 <div class="alert alert-success" role="alert">
+                     <strong>Success!</strong> <?= session()->getFlashdata('success') ?>
+                 </div>
+             <?php elseif (session()->getFlashdata('error') || session()->getTempdata('error')) : ?>
+                 <div class="alert alert-danger" role="alert">
+                     <strong>Error!</strong> <?= (session()->getFlashdata('error')) ? session()->getFlashdata('error') : session()->getTempdata('error') ?>
+                 </div>
+             <?php endif ?>
+         </div>
+     </div>
+     <!-- END VALIDATATION MESSAGES -->
+
+     <form action="invoice" method="post">
          <div class="row">
              <div class="col-md-8">
                  <div class="form-group">
@@ -24,7 +40,7 @@
              <div class="col-md-4">
                  <div class="form-group">
                      <label for="exampleFormControlInput1"><strong>No. Invoice</strong></label>
-                     <input type="text" class="form-control noinv" id="exampleFormControlInput1" name="noinv">
+                     <input type="text" class="form-control noinv" id="exampleFormControlInput1" value="<?= $invoice_number ?>" name="noinv">
                  </div>
                  <div class="form-group">
                      <label for="exampleFormControlInput1"><strong>Invoice Date</strong></label>
@@ -33,15 +49,13 @@
              </div>
          </div>
 
-         <div class="row">
-             <div class="col-md-3">
-                 <p><strong>Description</strong></p>
-             </div>
+         <div class="row mb-1">
+             <div class="col-md-3"><strong>Description</strong></div>
              <div class="col-md-2"><strong>Flight</strong></div>
              <div class="col-md-2"><strong>Booking</strong></div>
+             <div class="col-md-2"><strong>Date</strong></div>
              <div class="col-md-1"><strong>QTY</strong></div>
              <div class="col-md-2"><strong>Price</strong></div>
-             <div class="col-md-2"><strong>Total</strong></div>
          </div>
 
          <div class="row invoice-description">
@@ -61,19 +75,19 @@
                      <input type="text" class="form-control" id="exampleFormControlInput1" name="booking[]">
                  </div>
              </div>
+             <div class="col-md-2">
+                 <div class="form-group">
+                     <input type="date" class="form-control" id="exampleFormControlInput1" name="detail_date[]">
+                 </div>
+             </div>
              <div class="col-md-1">
                  <div class="form-group">
-                     <input type="text" class="form-control" id="exampleFormControlInput1" name="qty[]">
+                     <input type="text" class="form-control" id="qty" name="qty[]">
                  </div>
              </div>
              <div class="col-md-2">
                  <div class="form-group">
-                     <input type="text" class="form-control" id="exampleFormControlInput1" name="price[]">
-                 </div>
-             </div>
-             <div class="col-md-2">
-                 <div class="form-group">
-                     <input type="text" class="form-control" id="exampleFormControlInput1" name="total[]">
+                     <input type="text" class="form-control" id="price" name="price[]">
                  </div>
              </div>
          </div>
@@ -89,7 +103,7 @@
              </div>
          </div>
          <div class="row">
-             <button class="btn btn-primary btn-lg ml-2">Submit Invoice</button>
+             <button type="submit" class="btn btn-primary btn-lg ml-2">Submit Invoice</button>
          </div>
      </form>
 

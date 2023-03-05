@@ -31,9 +31,12 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->get('/invoice', 'Invoice::index');
-$routes->post('/invoice/print-invoice', 'Invoice::printInvoice');
-// $routes->get('/invoice/show-invoice', 'Invoice::showInvoice');
+$routes->get('invoice', 'Invoice::index');
+$routes->post('invoice', 'Invoice::save');
+$routes->get('invoice/all-invoice', 'Invoice::allInvoice');
+$routes->get('detail-invoice/(:num)', 'Invoice::detailInvoice/$1');
+$routes->get('invoice/delete/(:num)', 'Invoice::deleteInvoice/$1');
+// $routes->get('/PdfController/htmlToPDF', 'PdfController::htmlToPDF');
 
 /*
  * --------------------------------------------------------------------
