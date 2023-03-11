@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <?php $this->renderSection('css'); ?>
 
 </head>
 
@@ -173,6 +174,10 @@
     <script src="<?= base_url() ?>assets/js/sb-admin-2.min.js"></script>
     <!-- Datetimepicker -->
     <script>
+        function Previous() {
+            window.history.go(-1);
+        }
+
         $(document).ready(function() {
             $('.datetimepicker').formatDate("yy-mm-dd", new Date(2007, 1 - 1, 26));
         });

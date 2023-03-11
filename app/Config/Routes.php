@@ -14,7 +14,9 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override();
+$routes->set404Override(function () {
+  echo view('errors/html/404');
+});
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -36,7 +38,9 @@ $routes->post('invoice', 'Invoice::save');
 $routes->get('invoice/all-invoice', 'Invoice::allInvoice');
 $routes->get('detail-invoice/(:num)', 'Invoice::detailInvoice/$1');
 $routes->get('invoice/delete/(:num)', 'Invoice::deleteInvoice/$1');
-// $routes->get('/PdfController/htmlToPDF', 'PdfController::htmlToPDF');
+$routes->get('invoice/edit-status/(:num)', 'Invoice::editStatusInvoice/$1');
+$routes->put('invoice/update-invoice', 'Invoice::updateStatusInvoice');
+$routes->get('invoice/print-invoice/(:num)', 'Invoice::printInvoice/$1');
 
 /*
  * --------------------------------------------------------------------
@@ -52,5 +56,5 @@ $routes->get('invoice/delete/(:num)', 'Invoice::deleteInvoice/$1');
  * needing to reload it.
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
