@@ -19,7 +19,7 @@
 -- Table structure for table `invoice_details`
 --
 
--- DROP TABLE IF EXISTS `invoice_details`;
+DROP TABLE IF EXISTS `invoice_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `invoice_details` (
@@ -28,13 +28,14 @@ CREATE TABLE `invoice_details` (
   `description` text NOT NULL,
   `detail_date` datetime NOT NULL,
   `flight` varchar(100) NOT NULL,
+  `route` varchar(100) NOT NULL,
   `booking` varchar(100) NOT NULL,
   `qty` int(11) NOT NULL,
   `price` decimal(19,2) NOT NULL,
   `total_details` decimal(19,2) NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,11 +44,6 @@ CREATE TABLE `invoice_details` (
 
 LOCK TABLES `invoice_details` WRITE;
 /*!40000 ALTER TABLE `invoice_details` DISABLE KEYS */;
-INSERT INTO `invoice_details` VALUES
-(1,1,'Test','2023-03-07 00:00:00','Garuda','PX987',1,1540000.00,1540000.00,'2023-03-07 03:28:53'),
-(2,1,'tersds','2023-03-02 00:00:00','Garuda','PX987',2,1540000.00,3080000.00,'2023-03-07 03:28:53'),
-(3,2,'tesrr','2023-03-07 00:00:00','Garuda','PX987',1,1540000.00,1540000.00,'2023-03-07 03:30:31'),
-(4,3,'asdasd','2023-03-02 00:00:00','Garuda','PX987',2,154000.00,308000.00,'2023-03-07 03:36:40');
 /*!40000 ALTER TABLE `invoice_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,6 +61,7 @@ CREATE TABLE `invoices` (
   `invoice_date` datetime NOT NULL,
   `invoice` varchar(100) NOT NULL,
   `total_invoice` decimal(19,2) NOT NULL,
+  `prosentase_service` decimal(19,2) NOT NULL,
   `status` varchar(100) NOT NULL DEFAULT 'NOT PAID',
   `payment` varchar(100) DEFAULT NULL,
   `tax` decimal(19,2) NOT NULL,
@@ -72,7 +69,7 @@ CREATE TABLE `invoices` (
   `note` text NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,10 +78,6 @@ CREATE TABLE `invoices` (
 
 LOCK TABLES `invoices` WRITE;
 /*!40000 ALTER TABLE `invoices` DISABLE KEYS */;
-INSERT INTO `invoices` VALUES
-(1,'PT.BERSAMA MENITI NUR\r\nRUKO BATAVIA BLOK LC 8 NO.23 KELAPA GADING JAKARTA 14240\r\nIndonesia 021-56515461 (0812389980932)\r\nbersamamenitinur@gmail.com\r\nPT.BERSAMA MENITI NUR','PT ESLINE SUMBER ENERGI\r\nRUKO BATAVIA BLOK LC 10 NO 12 KELAPA GADING JAKARTA 14240\r\nINDONESIA','2023-03-07 00:00:00','1',4620000.00,'NOT PAID',NULL,508200.00,231000.00,'','2023-03-07 03:28:53'),
-(2,'PT.BERSAMA MENITI NUR\r\nRUKO BATAVIA BLOK LC 8 NO.23 KELAPA GADING JAKARTA 14240\r\nIndonesia 021-56515461 (0812389980932)\r\nbersamamenitinur@gmail.com\r\nPT.BERSAMA MENITI NUR','PT ESLINE SUMBER ENERGI\r\nRUKO BATAVIA BLOK LC 10 NO 12 KELAPA GADING JAKARTA 14240\r\nINDONESIA','2023-03-07 00:00:00','2',1540000.00,'NOT PAID',NULL,0.00,0.00,'','2023-03-07 03:30:31'),
-(3,'PT.BERSAMA MENITI NUR\r\nRUKO BATAVIA BLOK LC 8 NO.23 KELAPA GADING JAKARTA 14240\r\nIndonesia 021-56515461 (0812389980932)\r\nbersamamenitinur@gmail.com\r\nPT.BERSAMA MENITI NUR','PT ESLINE SUMBER ENERGI\r\nRUKO BATAVIA BLOK LC 10 NO 12 KELAPA GADING JAKARTA 14240\r\nINDONESIA','2023-03-02 00:00:00','3',308000.00,'PAID','MANDIRI',33880.00,0.00,'An. Rohim Muhamad','2023-03-07 03:36:40');
 /*!40000 ALTER TABLE `invoices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +97,7 @@ CREATE TABLE `migrations` (
   `time` int(11) NOT NULL,
   `batch` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,9 +107,40 @@ CREATE TABLE `migrations` (
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` VALUES
-(15,'2023-03-04-155530','App\\Database\\Migrations\\CreateTableInvoice','default','App',1678133817,1),
-(16,'2023-03-04-155533','App\\Database\\Migrations\\CreateTableInvoiceDetail','default','App',1678133817,1);
+(25,'2023-03-04-155530','App\\Database\\Migrations\\CreateTableInvoice','default','App',1678530160,1),
+(26,'2023-03-04-155533','App\\Database\\Migrations\\CreateTableInvoiceDetail','default','App',1678530160,1),
+(27,'2023-03-11-101845','App\\Database\\Migrations\\CreateTableUser','default','App',1678530161,1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES
+(1,'Rohim Muhamad','admin@gmail.com','$2y$10$IAJ/1K2qaK.iBx9DUDAVeeRP111FDhYzb9R3NQdI9fA1Nhw2PsVdC','2023-03-11 03:47:31'),
+(2,'Dicky','bersamamenitinur@gmail.com','$2y$10$R/K3giOm9n2DUKftDRDnW.4itHnCuEbzpbJYQ936oe6nvr0DTCFC6','2023-03-11 03:47:31');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -128,4 +152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-07  3:48:47
+-- Dump completed on 2023-03-11 18:43:21

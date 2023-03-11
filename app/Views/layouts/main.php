@@ -100,7 +100,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= session('name') ?></span>
                                 <img class="img-profile rounded-circle" src="<?= base_url() ?>assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -127,7 +127,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>PT. Bersama Meniti Nur - 2023</span>
                     </div>
                 </div>
             </footer>
@@ -157,7 +157,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
+                    <a class="btn btn-primary" href="<?= base_url() ?>logout">Logout</a>
                 </div>
             </div>
         </div>

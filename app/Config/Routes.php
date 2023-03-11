@@ -31,15 +31,18 @@ $routes->set404Override(function () {
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
+$routes->get('/', 'Auth::index', ['filter' => 'guest']);
+$routes->post('/login', 'Auth::login');
+$routes->get('/logout', 'Auth::logout', ['filter' => 'member']);
 
-$routes->get('invoice', 'Invoice::index');
+$routes->get('invoice', 'Invoice::index', ['filter' => 'member']);
 $routes->post('invoice', 'Invoice::save');
-$routes->get('invoice/all-invoice', 'Invoice::allInvoice');
+$routes->get('invoice/all-invoice', 'Invoice::allInvoice', ['filter' => 'member']);
 $routes->get('detail-invoice/(:num)', 'Invoice::detailInvoice/$1');
 $routes->get('invoice/delete/(:num)', 'Invoice::deleteInvoice/$1');
 $routes->get('invoice/edit-status/(:num)', 'Invoice::editStatusInvoice/$1');
-$routes->put('invoice/update-invoice', 'Invoice::updateStatusInvoice');
+$routes->put('invoice/update-invoice', 'Invoice::updateStatusInvoice', ['filter' => 'member']);
 $routes->get('invoice/print-invoice/(:num)', 'Invoice::printInvoice/$1');
 
 /*
