@@ -33,18 +33,24 @@
          </div>
 
          <div class="form-group">
+           <?php $validation = \Config\Services::validation(); ?>
            <label for="exampleFormControlTextarea1" style="white-space: pre-line;"><strong>Bill To</strong></label>
-           <textarea class="form-control" id="exampleFormControlTextarea1" name="billto" rows="3"></textarea>
+           <textarea class="form-control <?= ($validation->hasError('billto')) ? 'is-invalid' : '' ?>" id="exampleFormControlTextarea1" name="billto" rows="3"></textarea>
+           <?php if ($validation->hasError('billto')) :  ?>
+             <div class="invalid-feedback">
+               <?= $validation->getError('billto'); ?>
+             </div>
+           <?php endif; ?>
          </div>
        </div>
        <div class="col-md-4">
          <div class="form-group">
            <label for="exampleFormControlInput1"><strong>No. Invoice</strong></label>
-           <input type="text" class="form-control noinv" id="exampleFormControlInput1" value="<?= $invoice_number ?>" name="noinv">
+           <input type="text" class="form-control noinv" id="exampleFormControlInput1" value="<?= $invoice_number ?>" name="noinv" required>
          </div>
          <div class="form-group">
            <label for="exampleFormControlInput1"><strong>Invoice Date</strong></label>
-           <input type="date" class="form-control" id="datetimepicker" name="dateinv">
+           <input type="date" class="form-control" id="datetimepicker" name="dateinv" required>
          </div>
        </div>
      </div>
@@ -93,17 +99,27 @@
        </div>
        <div class="col-md-2">
          <div class="form-group">
-           <input type="date" class="form-control" id="exampleFormControlInput1" name="detail_date[]">
+           <input type="date" class="form-control" id="exampleFormControlInput1" name="detail_date[]" required>
          </div>
        </div>
        <div class="col-md-1">
          <div class="form-group">
-           <input type="text" class="form-control" id="qty" name="qty[]">
+           <input type="text" class="form-control <?= ($validation->hasError('qty')) ? 'is-invalid' : '' ?>" id="qty" name="qty[]" required>
+           <?php if ($validation->hasError('qty')) :  ?>
+             <div id="validationServer05Feedback" class="invalid-feedback">
+               <?= $validation->getError('qty'); ?>
+             </div>
+           <?php endif; ?>
          </div>
        </div>
        <div class="col-md-2">
          <div class="form-group">
-           <input type="text" class="form-control" id="price" name="price[]">
+           <input type="text" class="form-control <?= ($validation->hasError('price')) ? 'is-invalid' : '' ?>" id="price" name="price[]" required>
+           <?php if ($validation->hasError('price')) :  ?>
+             <div class="invalid-feedback">
+               <?= $validation->getError('price'); ?>
+             </div>
+           <?php endif; ?>
          </div>
        </div>
      </div>

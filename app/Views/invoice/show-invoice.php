@@ -19,7 +19,7 @@
   <hr>
   <div class="row">
     <div class="col-md-6 justify-content-start my-auto mx-auto">
-      <img src="<?= base_url() ?>images/logo.jpeg" class="img-fluid w-50" alt="...">
+      <img src="<?= base_url() ?>images/bmn_logo.png" class="img-fluid w-50" alt="...">
     </div>
     <div class="col-md-6 text-right">
       <p><?= $invoice['from'] ?></p>

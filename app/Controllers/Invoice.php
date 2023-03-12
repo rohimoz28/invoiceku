@@ -15,7 +15,7 @@ class Invoice extends BaseController
   {
     $this->invoiceModel = new InvoiceInvoice();
     $this->invoiceDetailModel = new InvoiceDetail();
-    helper('custom');
+    helper(['form', 'url', 'custom']);
   }
 
   public function index()
@@ -32,6 +32,41 @@ class Invoice extends BaseController
   public function save()
   {
     $session = \Config\Services::session();
+
+    // VALIDATION
+    $val = $this->validate([
+      'billto' => [
+        'label' => 'Penerima',
+        'rules' => 'required',
+        'errors' => [
+          'required' => 'Kolom penerima wajib di isi!',
+        ]
+      ],
+      'qty.*' => [
+        'label' => 'Kuantitas',
+        'rules' => 'integer',
+        'errors' => [
+          'integer' => 'Di isi angka!',
+        ]
+      ],
+      'price.*' => [
+        'label' => 'Penerima',
+        'rules' => 'integer',
+        'errors' => [
+          'integer' => 'Di isi angka!',
+        ]
+      ],
+    ]);
+
+    if (!$val) {
+      $data = [
+        'invoice_number' => $this->request->getVar('noinv'),
+        'validation' => $this->validator
+      ];
+      return view('invoice/invoice', $data);
+    }
+    // END VALIDATION
+
     $service = $this->request->getVar('service');
     $tax = $this->request->getVar('tax');
     // dd($service);
@@ -85,6 +120,7 @@ class Invoice extends BaseController
     $invoice['service'] = $total_service = ($total_invoice * $service) / 100;
     $invoice['tax'] = ($total_service * $tax) / 100;
     // dd($invoice['tax']);
+
     $is_save = $this->invoiceModel->saveInvoice($invoice, $invoice_detail);
 
     if ($is_save == false) {
@@ -106,7 +142,7 @@ class Invoice extends BaseController
     $invoices = $this->invoiceModel->getInvoices($invoice_id);
     $details = $this->invoiceDetailModel->getInvoiceDetail($invoice_id);
     $total = $invoices['total_invoice'] + $invoices['service'] + $invoices['tax'];
-
+    // dd($details);
     $data = [
       'invoice' => $invoices,
       'details' => $details,
