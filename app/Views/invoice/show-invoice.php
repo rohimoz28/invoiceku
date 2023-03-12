@@ -22,13 +22,13 @@
       <img src="<?= base_url() ?>images/bmn_logo.png" class="img-fluid w-50" alt="...">
     </div>
     <div class="col-md-6 text-right">
-      <p><?= $invoice['from'] ?></p>
+      <p style="white-space: pre-line;"><?= $invoice['from'] ?></p>
     </div>
   </div>
   <hr>
   <div class="row d-flex">
     <div class="col-md-8 justify-content-start">
-      <p style="white-space: pre-line;"><strong>PEMBAYARAN KEPADA</strong></p>
+      <p><strong>PEMBAYARAN KEPADA</strong></p>
       <p style="white-space: pre-line;"><strong><?= $invoice['billto'] ?> </strong></p>
     </div>
     <div class="col-md-4justify-content-end">
