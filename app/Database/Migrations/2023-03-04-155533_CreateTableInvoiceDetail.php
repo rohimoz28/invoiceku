@@ -15,9 +15,9 @@ class CreateTableInvoiceDetail extends Migration
         'unsigned'       => true,
         'auto_increment' => true,
       ],
-      'invoice_id' => [
-        'type' => 'int',
-        'constraint' => 11,
+      'invoice_number' => [
+        'type' => 'varchar',
+        'constraint' => 100,
       ],
       'description' => [
         'type' => 'text',
@@ -53,7 +53,7 @@ class CreateTableInvoiceDetail extends Migration
     ]);
 
     $this->forge->addKey('id', TRUE);
-
+    // $this->forge->addForeignKey('invoice_id', 'invoices', 'id', '', 'CASCADE');
     $this->forge->createTable('invoice_details', TRUE);
   }
 

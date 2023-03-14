@@ -14,7 +14,7 @@ class InvoiceDetail extends Model
   protected $returnType       = 'array';
   protected $useSoftDeletes   = false;
   protected $protectFields    = true;
-  protected $allowedFields    = ['invoice_id', 'description',  'detail_date', 'flight', 'route', 'booking', 'qty', 'price', 'total_details'];
+  protected $allowedFields    = ['invoice_number', 'description',  'detail_date', 'flight', 'route', 'booking', 'qty', 'price', 'total_details'];
 
   // Dates
   protected $useTimestamps = false;
@@ -42,7 +42,7 @@ class InvoiceDetail extends Model
 
   public function getInvoiceDetail($invoice_id = null)
   {
-    $sql = "SELECT * FROM invoice_details d WHERE d.invoice_id = '$invoice_id'";
+    $sql = "SELECT * FROM invoice_details d WHERE d.invoice_number = '$invoice_id'";
     $query = $this->db->query($sql);
     return $query->getResultArray();
   }

@@ -14,7 +14,7 @@ class Invoice extends Model
   protected $returnType       = 'array';
   protected $useSoftDeletes   = false;
   protected $protectFields    = true;
-  protected $allowedFields    = ['from', 'billto', 'invoice', 'invoice_date', 'status', 'note', 'total_invoice', 'prosentase_invoice'];
+  protected $allowedFields    = ['from', 'billto', 'invoice_number', 'invoice_date', 'status', 'note', 'total_invoice', 'prosentase_invoice'];
 
   // Dates
   protected $useTimestamps = false;
@@ -55,11 +55,10 @@ class Invoice extends Model
 
   public function saveInvoice(array $invoice, array $invoice_detail): bool
   {
-    $this->db->transBegin();
+    $this->db->transStart();
     $this->db->table('invoices')->insert($invoice);
     $this->db->table('invoice_details')->insertBatch($invoice_detail);
-
-    // $this->db->transComplete();
+    $this->db->transComplete();
 
     if ($this->db->transStatus() === FALSE) {
       $this->db->transRollback();
@@ -72,11 +71,11 @@ class Invoice extends Model
 
   public function getLastInvoiceNumber()
   {
-    $sql = "SELECT * FROM invoices order by invoice desc";
+    $sql = "SELECT * FROM invoices order by id desc";
     $query = $this->db->query($sql);
     $last_inv = $query->getFirstRow();
 
-    return (is_null($query->getFirstRow())) ? 0 : $last_inv->invoice;
+    return (is_null($query->getFirstRow())) ? 0 : $last_inv->invoice_number;
   }
 
   public function updateInvoice($id, $data)
@@ -88,10 +87,12 @@ class Invoice extends Model
 
   public function deleteInvoice($invoice_id)
   {
-    $this->db->transBegin();
-
-    $this->db->table('invoices')->delete(['invoice' => $invoice_id]);
-    $this->db->table('invoice_details')->delete(['invoice_id' => $invoice_id]);
+    $this->db->transStart();
+    $this->db->query("DELETE FROM invoice_details WHERE invoice_number = '$invoice_id'");
+    $this->db->query("DELETE FROM invoices WHERE invoice_number = '$invoice_id'");
+    // $this->db->table('invoice_details')->delete(['invoice_id' => $invoice_id]);
+    // $this->db->table('invoices')->delete(['invoice' => $invoice_id]);
+    $this->db->transComplete();
 
     if ($this->db->transStatus() === FALSE) {
       $this->db->transRollback();
@@ -100,5 +101,9 @@ class Invoice extends Model
     }
 
     return ($this->db->transStatus() === false) ? false : true;
+
+    // return $this->db->table('invoices')
+    //   ->where('id', $invoice_id)
+    //   ->delete();
   }
 }

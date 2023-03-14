@@ -32,7 +32,7 @@
       <p style="white-space: pre-line;"><strong><?= $invoice['billto'] ?> </strong></p>
     </div>
     <div class="col-md-4justify-content-end">
-      <p><strong>No.Invoice: <?= $invoice['invoice'] ?></strong></p>
+      <p><strong>No.Invoice: <?= $invoice_number ?></strong></p>
       <p><strong>Tanggal Invoice: <?= date("Y-m-d", strtotime($invoice['invoice_date'])) ?></strong></p>
       <p><strong>Status: <span class="<?= ($invoice['status'] == 'NOT PAID') ? 'text-danger' : 'text-success' ?>"><?= $invoice['status'] ?></span></strong></p>
     </div>

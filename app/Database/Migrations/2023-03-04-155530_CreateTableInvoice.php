@@ -24,7 +24,7 @@ class CreateTableInvoice extends Migration
       'invoice_date' => [
         'type' => 'datetime',
       ],
-      'invoice' => [
+      'invoice_number' => [
         'type' => 'varchar',
         'constraint' => 100,
       ],

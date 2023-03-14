@@ -42,12 +42,12 @@
             <tr class="text-center">
               <td class="d-flex justify-content-between">
                 <a href="<?= base_url() ?>detail-invoice/<?= $invoice['id'] ?>" class="btn btn-sm btn-success">Detail</a>
-                <button type="button" data-id="<?= $invoice['invoice'] ?>" class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#modal-delete">
+                <button type="button" data-id="<?= $invoice['invoice_number'] ?>" class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#modal-delete">
                   Hapus
                 </button>
               </td>
               <td><?= date('Y-m-d', strtotime($invoice['invoice_date'])) ?></td>
-              <td><?= $invoice['invoice'] ?></td>
+              <td>IV.<?= $invoice['invoice_number'] ?>/BMN/<?= date("Y") ?></td>
               <td><?= cutString($invoice['billto']) ?></td>
               <td><a href="<?= base_url() ?>invoice/edit-status/<?= $invoice['id'] ?>" class="<?= ($invoice['status'] == 'NOT PAID') ? 'text-danger' : 'text-success' ?>"><?= $invoice['status'] ?></a></td>
               <td><?= $invoice['payment'] ?></td>
