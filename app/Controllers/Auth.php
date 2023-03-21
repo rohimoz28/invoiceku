@@ -14,8 +14,9 @@ class Auth extends BaseController
         $this->userModel = new UserModel();
     }
 
-    public function index()
+    public function index(): string
     {
+        return view('errors/html/not_found');
         return view('auth/login');
     }
 
